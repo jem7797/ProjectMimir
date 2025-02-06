@@ -68,7 +68,6 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
         onChange={(e) => setQuestion(e.target.value)}
         placeholder="Ask a question about the text..."
         mb={3}
-        color={inputColors}
         outlineColor={inputColors}
       />
       <Button

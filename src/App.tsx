@@ -1,11 +1,11 @@
-import ColorModeSwitch from "./Components/ColorModeSwitch";
 import Logo from "./Components/Logo";
+import NavBar from "./Components/NavBar";
 import UserInputBox from "./Components/UserInputBox";
 
 const App = () => {
   return (
     <div>
-      <ColorModeSwitch />
+      <NavBar/>
       <Logo />
       <UserInputBox />
     </div>

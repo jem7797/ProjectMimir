@@ -19,7 +19,6 @@ const UserInputBox = () => {
   const inputColors = colorMode === "dark" ? "white" : "blue";
 
   const API_KEY = import.meta.env.VITE_API_KEY;
-  console.log("API: ", API_KEY);
   const API_URL = "https://api.openai.com/v1/chat/completions";
 
   const summarizeText = async () => {
@@ -82,7 +81,12 @@ const UserInputBox = () => {
 
       {isLoading && (
         <Box justifyContent={"center"} display={"flex"} marginTop={5}>
-          <Spinner size={"xl"} color="blue" />
+          <Spinner
+            size={"xl"}
+            color="blue"
+            position={"fixed"}
+            transform="translate(-50%, -50%)"
+          />
         </Box>
       )}
 

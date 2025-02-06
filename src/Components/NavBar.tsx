@@ -1,10 +1,10 @@
 import { HStack } from "@chakra-ui/react"
-import ColorModeSwitch from "./ColorModeSwitch"
+import LeftSideHamburgerMenu from "./LeftSideHamburgerMenu"
 
 const NavBar = () => {
   return (
     <HStack>
-      <ColorModeSwitch/>
+      <LeftSideHamburgerMenu/>
     </HStack>
   )
 }

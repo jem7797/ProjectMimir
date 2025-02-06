@@ -8,7 +8,7 @@ const ColorModeSwitch = () => {
       <Switch
         isChecked={colorMode === "dark"}
         onChange={toggleColorMode}
-        ml={"auto"}
+        alignItems={"end"}
         pl={1}
       ></Switch>
       <Text whiteSpace="nowrap">Dark Mode</Text>
