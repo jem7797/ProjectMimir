@@ -58,15 +58,14 @@ const LeftSideHamburgerMenu = () => {
             listStyleType={"none"}
             justifyContent={"space-evenly"}
             alignItems={"center"}
+            marginLeft={-6}
             padding={4}
           >
-            <li>Flash Cards</li>
-            <li>Mimir Lore</li>
-            <li>About Me</li>
+            <li style={{color:"blue"}}>More Features Coming Soon</li>
           </Box>
 
           {/* footer of top menu */}
-          <Box display={"flex"} justifyContent={"center"} marginBottom={3} margin={5}>
+          <Box display={"flex"} justifyContent={"center"} marginBottom={3} >
             <IconButton
               onClick={handleSettingsClick}
               icon={<CiSettings />}
