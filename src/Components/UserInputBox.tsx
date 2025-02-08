@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { BsLightning } from "react-icons/bs";
 import SideAssistant from "./SideAssistant";
+import Logo from "./Logo";
 
 const UserInputBox = () => {
   const [userMessage, setUserMessage] = useState("");
@@ -57,7 +58,9 @@ const UserInputBox = () => {
   };
 
   return (
-    <>
+    <Box marginTop={10}>
+
+    <Logo/>
       <Box display={"flex"} justifyContent={"center"} marginTop={6}>
         <Textarea
           width={"70%"}
@@ -66,7 +69,11 @@ const UserInputBox = () => {
           outlineColor={inputColors}
           whiteSpace={"pre-wrap"}
           value={userMessage}
-          onChange={(e) => setUserMessage(e.target.value)}
+          onChange={(e) =>setUserMessage(e.target.value)}
+          onKeyDown={(e) => {if(e.key == "Enter" && !e.shiftKey){
+            e.preventDefault();
+            summarizeText();
+          }}}
         />
       </Box>
       <Box display={"flex"} justifyContent={"center"} p={4}>
@@ -107,7 +114,7 @@ const UserInputBox = () => {
           <SideAssistant userInput={userMessage} />
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

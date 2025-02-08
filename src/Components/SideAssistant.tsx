@@ -66,6 +66,12 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
       <Textarea
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key == "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            askQuestion();
+          }
+        }}
         placeholder="Ask a question about the text..."
         mb={3}
         outlineColor={inputColors}
@@ -86,7 +92,7 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
       )}
       {response && (
         <Box mt={3} backgroundColor={"blue.400"} p={3} borderRadius="md">
-          <Text color={"black"} fontStyle={"bold"}>
+          <Text color={"white.200"} fontStyle={"bold"}>
             {response}
           </Text>
         </Box>

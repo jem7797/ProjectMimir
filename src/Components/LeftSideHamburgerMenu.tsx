@@ -3,63 +3,77 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { CiSettings } from "react-icons/ci";
+import { useSettings } from "../Components/Context/SettingContext";
 
 const LeftSideHamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { settingsIsOpen, setSettingsIsOpen } = useSettings();
+
+  const handleSettingsClick = () => {
+    setSettingsIsOpen(!settingsIsOpen);
+  };
+
   return (
-    <Box overflow={"hidden"}>
+    <Box>
+      {/* hamburger menu icon */}
       {!isOpen && (
         <IconButton
           aria-label={"hambuger menu"}
           icon={<GiHamburgerMenu />}
           onClick={() => setIsOpen(!isOpen)}
-          zIndex="1000"
           bg={"transparent"}
           fontSize={"x-large"}
         />
       )}
-
       {isOpen && (
         <Box
-          width={"180px"}
-          height={"100vh"}
+          width={"100%"}
+          height={"50px"}
           alignContent={"start"}
-          backgroundColor={"lightgrey"}
+          backgroundColor={"whiteAlpha.200"}
           borderRadius={3}
-          position={"absolute"}
+          position={"fixed"}
+          top={0}
+          left={0}
           display={"flex"}
-          flexDirection={"column"}
+          flexDirection={"row"}
         >
+          {/* Close Menu Icon */}
           <IconButton
             aria-label="close menu"
             icon={<RiCloseLine />}
             onClick={() => setIsOpen(false)}
-            position="absolute"
-            right="-2.5rem"
             bg={"transparent"}
             fontSize={"x-large"}
+            alignSelf={"flex-end"}
+            margin={2}
           />
+          {/* Items in top Menu */}
           <Box
             as="ul"
-            flexDirection={"column"}
-            gap={4}
-            p={4}
             display={"flex"}
+            flexDirection={"row"}
+            width={"100%"}
             fontSize={"x-large"}
             listStyleType={"none"}
+            justifyContent={"space-evenly"}
+            alignItems={"center"}
+            padding={4}
           >
             <li>Flash Cards</li>
             <li>Mimir Lore</li>
-            <li>About Us</li>
+            <li>About Me</li>
           </Box>
 
-          <Box as="footer" mt={"auto"} p={4} bottom={0} marginLeft={-4}>
+          {/* footer of top menu */}
+          <Box display={"flex"} justifyContent={"center"} marginBottom={3} margin={5}>
             <IconButton
+              onClick={handleSettingsClick}
               icon={<CiSettings />}
-              aria-label={""}
+              aria-label={"settings"}
               bg={"transparent"}
               fontSize={"xx-large"}
-            ></IconButton>
+            />
           </Box>
         </Box>
       )}

@@ -4,7 +4,7 @@ import LeftSideHamburgerMenu from "./LeftSideHamburgerMenu"
 const NavBar = () => {
   return (
     <HStack>
-      <LeftSideHamburgerMenu/>
+      <LeftSideHamburgerMenu />
     </HStack>
   )
 }
