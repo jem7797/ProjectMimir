@@ -2,7 +2,7 @@ import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 //this sets the Theme configuration. Within the ThemeConfig is the intialColorMode which we set to dark
 const config: ThemeConfig ={
-    initialColorMode: "light"
+    initialColorMode: "dark"
 };
 
 // extendTheme basically executes this darkMode command, setting it to the config we set above
