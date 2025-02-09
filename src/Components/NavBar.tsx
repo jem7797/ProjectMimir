@@ -1,12 +1,14 @@
-import { HStack } from "@chakra-ui/react"
-import LeftSideHamburgerMenu from "./LeftSideHamburgerMenu"
+import { Box, HStack } from "@chakra-ui/react";
+import LeftSideHamburgerMenu from "./OverheadNavMenu";
 
 const NavBar = () => {
   return (
-    <HStack>
+    <Box position="fixed" top={0} width="100%" zIndex={1000}>
+    <HStack >
       <LeftSideHamburgerMenu />
     </HStack>
-  )
-}
+    </Box>
+  );
+};
 
-export default NavBar
+export default NavBar;

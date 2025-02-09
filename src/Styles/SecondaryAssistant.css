@@ -1,0 +1,33 @@
+.side-assistant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .side-assistant .title {
+    font-size: xx-large;
+    margin-bottom: 20px;
+  }
+  
+  .side-assistant .textarea-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .side-assistant .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .side-assistant .loading-spinner {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .side-assistant .response-container {
+    margin-top: 20px;
+    width: 100%;
+  }

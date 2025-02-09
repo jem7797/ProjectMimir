@@ -1,42 +1,30 @@
-import axios from "axios";
-import {
-  Box,
-  Button,
-  Textarea,
-  useColorMode,
-  Text,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Textarea, Button, Text, Spinner, useColorMode } from "@chakra-ui/react";
 import { useState } from "react";
-import { BsLightning } from "react-icons/bs";
-import SideAssistant from "./SideAssistant";
 import Logo from "./Logo";
-import "../Styles/fonts.css";
-
+import axios from "axios";
+import { BsLightning } from "react-icons/bs";
+import "../Styles/UserInputBox.css";
+import "../Styles/fonts.css"
 const UserInputBox = () => {
   const [userMessage, setUserMessage] = useState("");
-  const [summary, setSummary] = useState(""); // Stores Mimir's response
+  const [summary, setSummary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { colorMode } = useColorMode();
-  const inputColors = colorMode === "dark" ? "white" : "blue";
-
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const API_URL = "https://api.openai.com/v1/chat/completions";
+  const [menuIsOpen] = useState(false);
+  const {colorMode} = useColorMode();
+  const inputColors = colorMode =="light" ? "blue" : "whiteAlpha.800"; // Example color, adjust as needed
+const API_KEY = import.meta.env.VITE_API_KEY
 
   const summarizeText = async () => {
-    if (!userMessage.trim()) return; // Prevent empty requests
 
     setIsLoading(true);
-
     try {
       const response = await axios.post(
-        API_URL,
+        "https://api.openai.com/v1/engines/davinci-codex/completions",
         {
-          model: "gpt-4",
-          messages: [
+          prompt: [
             {
               role: "user",
-              content: `You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these intstructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your respone. Here is the user input: ${userMessage}`,
+              content: `You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response. Here is the user input: ${userMessage}`,
             },
           ],
           temperature: 0.7,
@@ -59,18 +47,11 @@ const UserInputBox = () => {
   };
 
   return (
-    <Box marginTop={10}>
-      <Text
-        textAlign={"center"}
-        marginLeft={-4}
-        className="cinzel"
-        fontSize={"xx-large"}
-      >
-        Mimir
-      </Text>
+    <Box className={`user-input-box ${menuIsOpen ? "menu-open" : ""}`}>
+      <Text className="title cinzel">Mimir</Text>
 
       <Logo />
-      <Box display={"flex"} justifyContent={"center"}>
+      <Box className="textarea-container">
         <Textarea
           width={"70%"}
           height={"150px"}
@@ -80,14 +61,14 @@ const UserInputBox = () => {
           value={userMessage}
           onChange={(e) => setUserMessage(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key == "Enter" && !e.shiftKey) {
+            if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               summarizeText();
             }
           }}
         />
       </Box>
-      <Box display={"flex"} justifyContent={"center"} paddingTop={6}>
+      <Box className="button-container">
         <Button
           color={inputColors}
           onClick={summarizeText}
@@ -98,7 +79,7 @@ const UserInputBox = () => {
       </Box>
 
       {isLoading && (
-        <Box justifyContent={"center"} display={"flex"} marginTop={5}>
+        <Box className="loading-spinner">
           <Spinner
             size={"xl"}
             color="blue"
@@ -109,20 +90,8 @@ const UserInputBox = () => {
       )}
 
       {summary && (
-        <Box>
-          <Box display={"flex"} justifyContent={"center"} p={4}>
-            <Text
-              width={"70%"}
-              p={4}
-              bg={"gray.100"}
-              borderRadius={"10"}
-              color={"white.200"}
-              backgroundColor={"blue.400"}
-            >
-              {summary}
-            </Text>
-          </Box>
-          <SideAssistant userInput={userMessage} />
+        <Box className="summary-container">
+          <Box>{summary}</Box>
         </Box>
       )}
     </Box>

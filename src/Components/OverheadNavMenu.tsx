@@ -1,17 +1,22 @@
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, IconButton, useColorMode } from "@chakra-ui/react";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { CiSettings } from "react-icons/ci";
 import { useSettings } from "../Components/Context/SettingContext";
+import "../Styles/OverheadNavMenu.css";
+import "..//Styles/fonts.css"
 
-const LeftSideHamburgerMenu = () => {
+const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { settingsIsOpen, setSettingsIsOpen } = useSettings();
+  const { colorMode } = useColorMode();
 
   const handleSettingsClick = () => {
     setSettingsIsOpen(!settingsIsOpen);
   };
+
+  const colors = colorMode === "light" ? "blue" : "white";
 
   return (
     <Box>
@@ -26,52 +31,27 @@ const LeftSideHamburgerMenu = () => {
         />
       )}
       {isOpen && (
-        <Box
-          width={"100%"}
-          height={"50px"}
-          alignContent={"start"}
-          backgroundColor={"whiteAlpha.200"}
-          borderRadius={3}
-          position={"fixed"}
-          top={0}
-          left={0}
-          display={"flex"}
-          flexDirection={"row"}
-        >
+        <Box className="overhead-nav-menu">
           {/* Close Menu Icon */}
           <IconButton
             aria-label="close menu"
             icon={<RiCloseLine />}
             onClick={() => setIsOpen(false)}
-            bg={"transparent"}
-            fontSize={"x-large"}
-            alignSelf={"flex-end"}
-            margin={2}
+            className="close-button"
           />
           {/* Items in top Menu */}
-          <Box
-            as="ul"
-            display={"flex"}
-            flexDirection={"row"}
-            width={"100%"}
-            fontSize={"x-large"}
-            listStyleType={"none"}
-            justifyContent={"space-evenly"}
-            alignItems={"center"}
-            marginLeft={-6}
-            padding={4}
-          >
-            <li style={{color:"blue"}}>More Features Coming Soon</li>
+          <Box as="ul" className={"menu-items cinzel" } color={colors}>
+            <li >Coming Soon</li>
+            
           </Box>
 
           {/* footer of top menu */}
-          <Box display={"flex"} justifyContent={"center"} marginBottom={3} >
+          <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
             <IconButton
               onClick={handleSettingsClick}
               icon={<CiSettings />}
               aria-label={"settings"}
-              bg={"transparent"}
-              fontSize={"xx-large"}
+              className="settings-button"
             />
           </Box>
         </Box>
@@ -80,4 +60,4 @@ const LeftSideHamburgerMenu = () => {
   );
 };
 
-export default LeftSideHamburgerMenu;
+export default OverheadNavMenu;
