@@ -1,7 +1,6 @@
 import { Box, Image, useColorMode } from "@chakra-ui/react";
 import lightModeMimir from "../assets/lightModeMimir.png";
-import darkModeMimir from "../assets/darkModeMimir.png";
-
+import cleaned_darkModeMimir from "../assets/cleaned_darkModeMimir.png"
 const Logo = () => {
   const { colorMode } = useColorMode();
 
@@ -10,7 +9,7 @@ const Logo = () => {
       {colorMode == "light" ? (
         <Image src={lightModeMimir} boxSize={"190px"} />
       ) : (
-        <Image src={darkModeMimir} boxSize={"190px"} />
+        <Image src={cleaned_darkModeMimir} boxSize={"190px"} />
       )}
     </Box>
   );

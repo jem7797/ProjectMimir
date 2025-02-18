@@ -11,7 +11,7 @@ const UserInputBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [menuIsOpen] = useState(false);
   const {colorMode} = useColorMode();
-  const inputColors = colorMode =="light" ? "blue" : "whiteAlpha.800"; // Example color, adjust as needed
+  const inputColors = colorMode =="light" ? "blue" : "whiteAlpha.800";
 const API_KEY = import.meta.env.VITE_API_KEY
 
   const summarizeText = async () => {

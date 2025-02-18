@@ -15,10 +15,10 @@
   
   .overhead-nav-menu .close-button {
     background-color: transparent;
-    font-size: x-large;
+    font-size: xx-large;
     align-self: flex-end;
     margin: auto;
-    margin-left: 4px;
+    margin-left: 6px;
   }
   
   .overhead-nav-menu .menu-items {
@@ -36,5 +36,5 @@
   .overhead-nav-menu .settings-button {
     background-color: transparent;
     font-size: xx-large;
-    margin-top: 6px;
+    margin-top: 10px;
   }
