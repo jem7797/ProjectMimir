@@ -9,7 +9,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { IoIosSend } from "react-icons/io";
-import "../Styles/SideAssistant.css";
+import "../Styles/SecondaryAssistant.css";
 
 interface SideAssistantProps {
   userInput: string;
@@ -60,10 +60,10 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
 
   return (
     <Box className="side-assistant">
-      <Text className="title">Assistant</Text>
+
       <Box className="textarea-container">
         <Textarea
-          placeholder="Ask me anything..."
+          placeholder="Ask about the text..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           outlineColor={inputColors}
@@ -85,7 +85,16 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
       )}
       {response && (
         <Box className="response-container">
-          <Text>{response}</Text>
+          <Text
+            width={"70%"}
+            p={4}
+            bg={"gray.100"}
+            borderRadius={"10"}
+            color={"white.200"}
+            backgroundColor={"blue.400"}
+          >
+            {response}
+          </Text>
         </Box>
       )}
     </Box>
