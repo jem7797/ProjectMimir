@@ -2,19 +2,14 @@ import { Box, IconButton, useColorMode } from "@chakra-ui/react";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
-import { CiSettings } from "react-icons/ci";
-import { useSettings } from "../Components/Context/SettingContext";
+import { CgProfile } from "react-icons/cg";
 import "../Styles/OverheadNavMenu.css";
-import "..//Styles/fonts.css"
+import "..//Styles/fonts.css";
+import { Link } from "react-router-dom";
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { settingsIsOpen, setSettingsIsOpen } = useSettings();
   const { colorMode } = useColorMode();
-
-  const handleSettingsClick = () => {
-    setSettingsIsOpen(!settingsIsOpen);
-  };
 
   const colors = colorMode === "light" ? "blue" : "white";
 
@@ -40,19 +35,19 @@ const OverheadNavMenu = () => {
             className="close-button"
           />
           {/* Items in top Menu */}
-          <Box as="ul" className={"menu-items cinzel" } color={colors}>
-            <li >Coming Soon</li>
-            
+          <Box as="ul" className={"menu-items cinzel"} color={colors}>
+            <li>Coming Soon</li>
           </Box>
 
           {/* footer of top menu */}
           <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
-            <IconButton
-              onClick={handleSettingsClick}
-              icon={<CiSettings />}
-              aria-label={"settings"}
-              className="settings-button"
-            />
+            <Link to={"/profile"}>
+              <IconButton
+                icon={<CgProfile />}
+                aria-label={"profile"}
+                className="profile-button"
+              />
+            </Link>
           </Box>
         </Box>
       )}

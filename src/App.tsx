@@ -1,32 +1,37 @@
 import { HamburgerMenuProvider } from "./Components/Context/HamburgerMenuContext";
 import {
   SettingsProvider,
-  useSettings,
 } from "./Components/Context/SettingContext";
 import NavBar from "./Components/NavBar";
-import SettingsMenu from "./Components/SettingsMenu";
 import UserInputBox from "./Components/UserInputBox";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import ProfilePage from "./Pages/Profile";
 
 const App = () => {
   return (
-    <div>
-      
-      
-      <HamburgerMenuProvider>
-      <SettingsProvider>
-        <AppContent />
-      </SettingsProvider>
-      </HamburgerMenuProvider>
-    </div>
+    <Router>
+      <div>
+        <HamburgerMenuProvider>
+          <SettingsProvider>
+              <Routes>
+                <Route path="/" element={<AppContent />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Routes>
+          </SettingsProvider>
+        </HamburgerMenuProvider>
+      </div>
+    </Router>
   );
 };
 const AppContent = () => {
-  const { settingsIsOpen } = useSettings();
 
   return (
-    <div>
+    <div style={{ width: "100vw" }}>
       <NavBar />
-      {settingsIsOpen && <SettingsMenu/>}
       <UserInputBox />
     </div>
   );
