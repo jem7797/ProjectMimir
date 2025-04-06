@@ -10,11 +10,13 @@ import {
   Routes,
 } from "react-router-dom";
 import ProfilePage from "./Pages/Profile";
+import { SignedInProvider } from "./Components/Context/SignedInContext";
 
 const App = () => {
   return (
     <Router>
       <div>
+        <SignedInProvider>
         <HamburgerMenuProvider>
           <SettingsProvider>
               <Routes>
@@ -23,6 +25,7 @@ const App = () => {
               </Routes>
           </SettingsProvider>
         </HamburgerMenuProvider>
+        </SignedInProvider>
       </div>
     </Router>
   );
