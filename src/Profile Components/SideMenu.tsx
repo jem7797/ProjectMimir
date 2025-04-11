@@ -1,17 +1,28 @@
 import { Sidebar, Menu, MenuItem, sidebarClasses } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../Components/Context/SettingContext';
+import SettingsMenu from '../Components/SettingsMenu';
 
 const SideMenu = () => {
 const {settingsIsOpen, setSettingsIsOpen} = useSettings();
+
+
 const handleClick = () => {
-setSettingsIsOpen(!settingsIsOpen)
-}
+setSettingsIsOpen(!settingsIsOpen);
+    console.log("settings");
+  };
+
+
+
 
 
   return (
+<>
 
-    <Sidebar   rootStyles={{
+{settingsIsOpen ? <SettingsMenu/> : ""}
+
+
+    <Sidebar rootStyles={{
         [`.${sidebarClasses.container}`]: {
           backgroundColor: '#171929',
           height: "100vh",
@@ -28,6 +39,7 @@ setSettingsIsOpen(!settingsIsOpen)
     <MenuItem onClick={() => handleClick()} > Settings </MenuItem>
   </Menu>
     </Sidebar>
+    </>
    
   )
 }
