@@ -1,4 +1,4 @@
-import { Box, IconButton, useColorMode } from "@chakra-ui/react";
+import { Box, IconButton, Image,  useColorMode } from "@chakra-ui/react";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
@@ -6,11 +6,15 @@ import { CgProfile } from "react-icons/cg";
 import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
+import { useSignedIn } from "./Context/SignedInContext";
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode } = useColorMode();
+  const {signedInUser} = useSignedIn();
 
+  console.log(signedInUser[2]);
+  
   const colors = colorMode === "light" ? "blue" : "white";
 
   return (
@@ -39,16 +43,24 @@ const OverheadNavMenu = () => {
             <li>Coming Soon</li>
           </Box>
 
+          
           {/* footer of top menu */}
+
+        <Box>         
+          
           <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
             <Link to={"/profile"}>
+ 
               <IconButton
-                icon={<CgProfile />}
+                icon={ signedInUser ? <Image src={signedInUser[2]?.toString()}borderRadius={"50%"} height={"35"} /> : <CgProfile />}
+
+
                 aria-label={"profile"}
                 className="profile-button"
               />
             </Link>
           </Box>
+          </Box> 
         </Box>
       )}
     </Box>

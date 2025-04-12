@@ -8,17 +8,18 @@ import {
 } from "react";
 
 interface SignedInContext {
-  signedInUser: [string | null, string | null];
-  setSignedInUser: Dispatch<SetStateAction<[string | null, string | null]>>;
+  signedInUser: [string | null, string | null, string | null];
+  setSignedInUser: Dispatch<SetStateAction<[string | null, string | null, string | null]>>;
 }
 
 const defaultUser: SignedInContext = {
-    signedInUser: [null, null],
+    signedInUser: [null, null, null],
     setSignedInUser: () => {},
 };
 
 const SignedInContext = createContext<SignedInContext>(defaultUser);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSignedIn = () => {
   const context = useContext(SignedInContext);
 
@@ -29,7 +30,7 @@ export const useSignedIn = () => {
 };
 
 export const SignedInProvider = ({ children }: { children: ReactNode }) => {
-    const [signedInUser, setSignedInUser] = useState<[string | null, string | null]>([null, null]);
+    const [signedInUser, setSignedInUser] = useState<[string | null, string | null,  string | null]>([null, null, null]);
 
     return (
         <SignedInContext.Provider value={{signedInUser, setSignedInUser}}>

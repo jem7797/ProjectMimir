@@ -15,7 +15,7 @@ const ProfileInfo = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      setSignedInUser([user.displayName, user.email]);
+      setSignedInUser([user.displayName, user.email, user.photoURL]);
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +27,7 @@ const ProfileInfo = () => {
   const handleSignOut = async () => {
     setIsLoading(true)
     try {
-      setSignedInUser([null, null]);
+      setSignedInUser([null, null, null]);
       signOut;
     } catch (error) {
       console.log(error);
