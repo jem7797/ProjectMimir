@@ -72,7 +72,7 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
       <Box className="button-container">
         <Button
           onClick={askQuestion}
-          isDisabled={isLoading}
+          isDisabled={question.length <= 2}
           rightIcon={<IoIosSend />}
         >
           Ask

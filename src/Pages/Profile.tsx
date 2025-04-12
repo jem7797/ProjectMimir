@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
-import MainProfilePicture from "../Profile Components/MainProfilePicture";
-import ProfileInfo from "../Profile Components/ProfileInfo";
-import SideMenu from "../Profile Components/SideMenu";
+import MainProfilePicture from "./Profile Components/MainProfilePicture";
+import ProfileInfo from "./Profile Components/ProfileInfo";
+import SideMenu from "./Profile Components/SideMenu";
 import { SettingsProvider } from "../Components/Context/SettingContext";
 
 const ProfilePage = () => {

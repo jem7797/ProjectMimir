@@ -18,11 +18,11 @@ const UserInputBox = () => {
   const [userMessage, setUserMessage] = useState("");
   const [summary, setSummary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [usedSpeech, setUsedSpeech] = useState(false);
   const [menuIsOpen] = useState(false);
   const { colorMode } = useColorMode();
+
   const inputColors = colorMode == "light" ? "blue" : "whiteAlpha.800";
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  const API_KEY = import.meta.env.VITE_OPEN_AI_API;
 
   const summarizeText = async () => {
     setIsLoading(true);
@@ -78,9 +78,6 @@ const UserInputBox = () => {
           whiteSpace={"pre-wrap"}
           value={userMessage}
           onChange={(e) => {
-            if (usedSpeech) {
-              setUsedSpeech(false);
-            }
             setUserMessage(e.target.value);
           }}
           onKeyDown={(e) => {
@@ -97,7 +94,7 @@ const UserInputBox = () => {
         <Button
           color={inputColors}
           onClick={summarizeText}
-          isDisabled={isLoading}
+          isDisabled={userMessage.length <= 2}
         >
           Summarize <BsLightning style={{ marginLeft: "8px" }} />
         </Button>

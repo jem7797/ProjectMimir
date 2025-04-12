@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Spacer, Spinner, Text } from "@chakra-ui/react";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { useSignedIn } from "../Components/Context/SignedInContext";
-import { auth, provider } from "../Configs/FirebaseConfig";
+import { useSignedIn } from "../../Components/Context/SignedInContext";
+import { auth, provider } from "../../Configs/FirebaseConfig";
 import { useState } from "react";
 
 const ProfileInfo = () => {
