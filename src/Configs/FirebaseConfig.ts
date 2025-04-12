@@ -8,7 +8,6 @@ import {getAuth, GoogleAuthProvider} from "firebase/auth"
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBf6Sx9yA91Uf0in7Zba2CWqAMW0QveZH4",
-  
   authDomain: "projectmimir-83f90.firebaseapp.com",
   projectId: "projectmimir-83f90",
   storageBucket: "projectmimir-83f90.firebasestorage.app",
@@ -18,7 +17,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider;
