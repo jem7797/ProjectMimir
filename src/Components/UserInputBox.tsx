@@ -22,40 +22,19 @@ const UserInputBox = () => {
   const { colorMode } = useColorMode();
 
   const inputColors = colorMode == "light" ? "blue" : "whiteAlpha.800";
-  const API_KEY = import.meta.env.VITE_OPEN_AI_API;
 
   const summarizeText = async () => {
     setIsLoading(true);
     try {
+      setIsLoading(true);
       const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "system",
-              content: `You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response.`,
-            },
-
-            {
-              role: "user",
-              content: `Here is the users input: ${userMessage}`,
-            },
-          ],
-          temperature: 0.7,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-          },
-        }
+        "https://getairesponse-uah4h66gpq-uc.a.run.app",
+        {message: userMessage }
       );
 
-      setSummary(response.data.choices[0].message.content); // Store the bot's response
+      setSummary(response.data.summary);
     } catch (error) {
-      console.error("Error fetching summary:", error);
-      setSummary("Oops! Something went wrong.");
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -126,7 +105,7 @@ const UserInputBox = () => {
             </Text>
           </Box>
 
-          <SecondaryAssistant userInput={userMessage}/>
+          <SecondaryAssistant userInput={userMessage} />
         </Box>
       )}
     </Box>
