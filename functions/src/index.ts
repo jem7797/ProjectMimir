@@ -1,18 +1,18 @@
 /* eslint-disable */
-import {onRequest} from "firebase-functions/v2/https";
-import {defineSecret} from "firebase-functions/params";
+import { onRequest } from "firebase-functions/v2/https";
+import { defineSecret } from "firebase-functions/params";
 import axios from "axios";
 
 const OPEN_AI_API = defineSecret("OPEN_AI_API");
 
 export const getAiResponse = onRequest(
-  {secrets: [OPEN_AI_API]},
-  async(req, res) => {
-    // Handle preflight (OPTIONS) requests
+  { secrets: [OPEN_AI_API] },
+  async (req, res) => {
+    // Handle preflight  requests
     if (req.method === "OPTIONS") {
-     res.set("Access-Control-Allow-Origin", "*");
-     res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-     res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+      res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
       res.status(204).send("");
       return;
     }
@@ -24,10 +24,8 @@ export const getAiResponse = onRequest(
           messages: [
             {
               role: "system",
-              // eslint-disable-next-line
-              content: 
-              // eslint-disable-next-line
-              "You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response.",
+              content:
+                "You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response.",
             },
 
             {
@@ -46,13 +44,14 @@ export const getAiResponse = onRequest(
         }
       );
 
+      res.set("Access-Control-Allow-Origin", "*");
+
       res
         .status(200)
-        .send({summary: response.data.choices[0].message.content});
+        .send({ summary: response.data.choices[0].message.content });
     } catch (error) {
       console.error("Error fetching summary:", error);
       res.send("Oops! Something went wrong, please try again.");
-      // eslint-disable-next-line
     } finally {
       res.end();
     }
