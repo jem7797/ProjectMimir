@@ -7,12 +7,12 @@ const OPEN_AI_API = defineSecret("OPEN_AI_API");
 export const getAiResponse = onRequest(
   {secrets: [OPEN_AI_API]},
   async (req, res) => {
+    
+    // Handle preflight (OPTIONS) requests
+    if (req.method === "OPTIONS") {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-    // Handle preflight (OPTIONS) requests
-    if (req.method === "OPTIONS") {
       res.status(204).send("");
       return;
     }
