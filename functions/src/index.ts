@@ -10,10 +10,13 @@ export const getAiResponse = onRequest(
   async (req, res) => {
     // Handle preflight  requests
     if (req.method === "OPTIONS") {
-      res.set("Access-Control-Allow-Origin", "https://mimirclosedbeta.vercel.app");      
+      res.set(
+        "Access-Control-Allow-Origin",
+        "https://mimirclosedbeta.vercel.app"
+      );
       res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
       res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-      res.status(204).send("");
+      res.status(204).send();
       return;
     }
     try {
@@ -44,15 +47,16 @@ export const getAiResponse = onRequest(
         }
       );
 
-      res.set("Access-Control-Allow-Origin", "https://mimirclosedbeta.vercel.app");
+      res.set(
+        "Access-Control-Allow-Origin",
+        "https://mimirclosedbeta.vercel.app"
+      );
       res
         .status(200)
         .send({ summary: response.data.choices[0].message.content });
     } catch (error) {
       console.error("Error fetching summary:", error);
       res.send("Oops! Something went wrong, please try again.");
-    } finally {
-      res.end();
     }
   }
 );
