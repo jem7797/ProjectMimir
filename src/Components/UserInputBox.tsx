@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Logo from "./Logo";
-src/Components/UserInputBox.tsximport { BsLightning } from "react-icons/bs";
+import { BsLightning } from "react-icons/bs";
 import "../Styles/UserInputBox.css";
 import "../Styles/fonts.css";
 import SecondaryAssistant from "./SecondaryAssistant";
