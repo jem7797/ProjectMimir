@@ -27,12 +27,20 @@ const UserInputBox = () => {
     setIsLoading(true);
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        "https://getairesponse-uah4h66gpq-uc.a.run.app",
-        {message: userMessage }
+      const response = await fetch(
+        "https://us-central1-projectmimir-83f90.cloudfunctions.net/getAiResponse",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: userMessage }),
+        }
       );
+      const ans = await response.text();
 
-      setSummary(response.data.summary);
+      console.log("res", ans);
+      setSummary(ans);
     } catch (error) {
       console.log(error);
     } finally {
