@@ -1,4 +1,4 @@
-import { Box, IconButton, Image, useColorMode } from "@chakra-ui/react";
+import { Box, IconButton, Image, useColorMode, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
@@ -31,7 +31,7 @@ const OverheadNavMenu = () => {
         />
       )}
       {isOpen && (
-        <Box className="overhead-nav-menu">
+        <VStack className={"overhead-nav-menu"} alignContent={"start"}>
           {/* Close Menu Icon */}
           <IconButton
             aria-label="close menu"
@@ -40,20 +40,9 @@ const OverheadNavMenu = () => {
             className="close-button"
           />
           {/* Items in top Menu */}
-          <Box as="ul" className={"menu-items cinzel"} color={colors}>
-            <Link to={"/"}>
-            <IconButton
-              aria-label={"Whats New"}
-              icon={<IoIosNotifications />}
-              variant={"ghost"}
-              fontSize={"x-large"}
-            />
-            </Link>
-          </Box>
 
-          {/* footer of top menu */}
-
-          <Box>
+          {/* Profile Button */}
+          <Box className="menu-items">
             <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
               <Link to={"/profile"}>
                 <IconButton
@@ -74,7 +63,19 @@ const OverheadNavMenu = () => {
               </Link>
             </Box>
           </Box>
-        </Box>
+
+          {/* whats new button */}
+          <Box as="ul" className={"menu-items cinzel"} color={colors}>
+            <Link to={"/"}>
+              <IconButton
+                aria-label={"Whats New"}
+                icon={<IoIosNotifications />}
+                variant={"ghost"}
+                fontSize={"x-large"}
+              />
+            </Link>
+          </Box>
+        </VStack>
       )}
     </Box>
   );
