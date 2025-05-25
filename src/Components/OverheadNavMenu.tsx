@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { IoIosNotifications } from "react-icons/io";
 import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
@@ -40,7 +41,14 @@ const OverheadNavMenu = () => {
           />
           {/* Items in top Menu */}
           <Box as="ul" className={"menu-items cinzel"} color={colors}>
-            <li>Coming Soon</li>
+            <Link to={"/"}>
+            <IconButton
+              aria-label={"Whats New"}
+              icon={<IoIosNotifications />}
+              variant={"ghost"}
+              fontSize={"x-large"}
+            />
+            </Link>
           </Box>
 
           {/* footer of top menu */}
