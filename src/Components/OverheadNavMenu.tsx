@@ -1,4 +1,11 @@
-import { Box, IconButton, Image, useColorMode, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  Image,
+  Slide,
+  useColorMode,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
@@ -30,53 +37,65 @@ const OverheadNavMenu = () => {
           fontSize={"x-large"}
         />
       )}
-      {isOpen && (
-        <VStack className={"overhead-nav-menu"} alignContent={"start"}>
-          {/* Close Menu Icon */}
-          <IconButton
-            aria-label="close menu"
-            icon={<RiCloseLine />}
-            onClick={() => setIsOpen(false)}
-            className="close-button"
-          />
-          {/* Items in top Menu */}
 
-          {/* Profile Button */}
-          <Box className="menu-items">
-            <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
-              <Link to={"/profile"}>
+      <Slide
+        direction="top"
+        in={isOpen}
+        style={{ zIndex: 10, position: "relative" }}
+        unmountOnExit
+      >
+        <Box>
+          <VStack alignItems="start">
+            {/* Close Menu Icon */}
+            <IconButton
+              aria-label="close menu"
+              icon={<RiCloseLine />}
+              fontSize={"x-large"}
+              variant={"ghost"}
+              onClick={() => setIsOpen(false)}
+              className="close-button"
+            />
+            {/* Items in top Menu */}
+
+            {/* Profile Button */}
+            <Box className="menu-items">
+              <Box display={"flex"} justifyContent={"center"} marginBottom={3}>
+                <Link to={"/profile"}>
+                  <IconButton
+                    fontSize={"x-large"}
+                    variant={"ghost"}
+                    icon={
+                      signedInUser && signedInUser[2] ? (
+                        <Image
+                          src={signedInUser[2]?.toString()}
+                          borderRadius={"50%"}
+                          height={"35"}
+                        />
+                      ) : (
+                        <CgProfile />
+                      )
+                    }
+                    aria-label={"profile"}
+                    className="profile-button"
+                  />
+                </Link>
+              </Box>
+            </Box>
+
+            {/* whats new button */}
+            <Box as="ul" className={"menu-items cinzel"} color={colors}>
+              <Link to={"/"}>
                 <IconButton
-                  icon={
-                    signedInUser && signedInUser[2] ? (
-                      <Image
-                        src={signedInUser[2]?.toString()}
-                        borderRadius={"50%"}
-                        height={"35"}
-                      />
-                    ) : (
-                      <CgProfile />
-                    )
-                  }
-                  aria-label={"profile"}
-                  className="profile-button"
+                  aria-label={"Whats New"}
+                  icon={<IoIosNotifications />}
+                  variant={"ghost"}
+                  fontSize={"x-large"}
                 />
               </Link>
             </Box>
-          </Box>
-
-          {/* whats new button */}
-          <Box as="ul" className={"menu-items cinzel"} color={colors}>
-            <Link to={"/"}>
-              <IconButton
-                aria-label={"Whats New"}
-                icon={<IoIosNotifications />}
-                variant={"ghost"}
-                fontSize={"x-large"}
-              />
-            </Link>
-          </Box>
-        </VStack>
-      )}
+          </VStack>
+        </Box>
+      </Slide>
     </Box>
   );
 };
