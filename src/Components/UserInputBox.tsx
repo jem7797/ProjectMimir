@@ -37,7 +37,7 @@ const UserInputBox = () => {
         }
       );
       const data = await response.json();
-      setSummary(data.answer);
+      setSummary(data.summary);
     } catch (error) {
       console.log(error);
     } finally {
