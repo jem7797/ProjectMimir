@@ -11,6 +11,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { IoIosNotifications } from "react-icons/io";
+import { GoSun } from "react-icons/go";
+import { IoMoonOutline } from "react-icons/io5";
+
 import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
@@ -18,7 +21,7 @@ import { useSignedIn } from "./Context/SignedInContext";
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const { signedInUser } = useSignedIn();
 
   console.log(signedInUser[2]);
@@ -26,7 +29,7 @@ const OverheadNavMenu = () => {
   const colors = colorMode === "light" ? "blue" : "white";
 
   return (
-    <Box>
+    <Box overflow={"hidden"}>
       {/* hamburger menu icon */}
       {!isOpen && (
         <IconButton
@@ -44,7 +47,7 @@ const OverheadNavMenu = () => {
         style={{ zIndex: 10, position: "relative" }}
         unmountOnExit
       >
-        <Box>
+        <Box overflow={"hidden"}>
           <VStack alignItems="start">
             {/* Close Menu Icon */}
             <IconButton
@@ -92,6 +95,22 @@ const OverheadNavMenu = () => {
                   fontSize={"x-large"}
                 />
               </Link>
+            </Box>
+
+            {/* Color Mode Switch */}
+            <Box
+              className="menu-items cinzel"
+              color={colors}
+              overflow={"hidden"}
+            >
+              <IconButton
+                aria-label={"Color Mode Switch"}
+                variant={"ghost"}
+                fontSize={"x-large"}
+                marginTop={"10px"}
+                icon={colorMode =="light" ? <GoSun /> : <IoMoonOutline />}
+                onClick={toggleColorMode}
+              />
             </Box>
           </VStack>
         </Box>

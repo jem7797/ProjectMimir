@@ -1,28 +1,35 @@
-import { Box, Flex } from "@chakra-ui/react";
+import {  Flex, IconButton} from "@chakra-ui/react";
 import MainProfilePicture from "./Profile Components/MainProfilePicture";
 import ProfileInfo from "./Profile Components/ProfileInfo";
-import SideMenu from "./Profile Components/SideMenu";
-import { SettingsProvider } from "../Components/Context/SettingContext";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
-const ProfilePage = () => {
-  return (
-    <SettingsProvider>
-  {ProfileContent()}
-  </SettingsProvider>
-  );
-  
-};
+
 const ProfileContent = () => {
-
   return (
-    <Flex height="100vh" overflow="hidden">
+    <Flex height="100vh">
       {/* Sidebar */}
-      <Box width="50px" height="100vh">
-        <SideMenu />
-      </Box>
+
+      <Link to={"/"}>
+        <IconButton
+          aria-label={"back button"}
+          icon={<IoMdArrowRoundBack />}
+          variant={"ghost"}
+          fontSize={"xx-large"}
+          marginTop={"5px"}
+          marginLeft={"5px"}
+          overflow={"hidden"}
+        />
+      </Link>
 
       {/* Main Content */}
-      <Flex flex="1" direction="column" align="center" justify="center" marginTop={"-320px"} marginLeft={"-50"}>
+      <Flex
+        flex="1"
+        direction="column"
+        justify="center"
+        marginTop={"-320px"}
+        marginLeft={"-50"}
+      >
         {/* Profile Picture */}
         <MainProfilePicture />
 
@@ -32,4 +39,4 @@ const ProfileContent = () => {
     </Flex>
   );
 };
-export default ProfilePage;
+export default ProfileContent;
