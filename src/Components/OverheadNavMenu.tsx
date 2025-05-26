@@ -22,22 +22,17 @@ import { useSignedIn } from "./Context/SignedInContext";
 import SettingsMenu from "./SettingsMenu";
 import { useSettings } from "./Context/SettingContext";
 
-
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { signedInUser } = useSignedIn();
-  const {settingsIsOpen, setSettingsIsOpen} = useSettings();
+  const { settingsIsOpen, setSettingsIsOpen } = useSettings();
   console.log(signedInUser[2]);
 
   const colors = colorMode === "light" ? "blue" : "white";
 
   return (
-
-
-    
     <Box overflow={"hidden"}>
-
       {/* hamburger menu icon */}
       {!isOpen && (
         <IconButton
@@ -94,7 +89,12 @@ const OverheadNavMenu = () => {
             </Box>
 
             {/* whats new button */}
-            <Box as="ul" className={"menu-items cinzel"} color={colors} marginBottom={3}>
+            <Box
+              as="ul"
+              className={"menu-items cinzel"}
+              color={colors}
+              marginBottom={3}
+            >
               <Link to={"/"}>
                 <IconButton
                   aria-label={"Whats New"}
@@ -115,7 +115,9 @@ const OverheadNavMenu = () => {
                 onClick={() => setSettingsIsOpen(!settingsIsOpen)}
               />
 
-              {settingsIsOpen ? <SettingsMenu/> : ""}
+           
+                {settingsIsOpen ? <SettingsMenu /> : ""}
+       
             </Box>
 
             {/* Color Mode Switch */}
