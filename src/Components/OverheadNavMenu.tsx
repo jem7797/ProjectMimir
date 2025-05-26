@@ -13,6 +13,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoIosNotifications } from "react-icons/io";
 import { GoSun } from "react-icons/go";
 import { IoMoonOutline } from "react-icons/io5";
+import { AnimatePresence, motion } from "framer-motion";
 
 import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
@@ -108,7 +109,24 @@ const OverheadNavMenu = () => {
                 variant={"ghost"}
                 fontSize={"x-large"}
                 marginTop={"10px"}
-                icon={colorMode =="light" ? <GoSun /> : <IoMoonOutline />}
+                icon={
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={colorMode}
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {colorMode === "light" ? <GoSun /> : <IoMoonOutline />}
+                    </motion.div>
+                  </AnimatePresence>
+                }
                 onClick={toggleColorMode}
               />
             </Box>
