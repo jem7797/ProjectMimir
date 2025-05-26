@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   Box,
   Button,
@@ -22,42 +21,30 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
   const { colorMode } = useColorMode();
   const inputColors = colorMode === "dark" ? "white" : "blue";
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const API_URL = "https://api.openai.com/v1/chat/completions";
-
-  const askQuestion = async () => {
-    if (!question.trim()) return; // Prevent empty requests
+      const askQuestion = async () => {
+            if (!question.trim()) return; // Prevent empty requests
 
     setIsLoading(true);
     try {
-      const result = await axios.post(
-        API_URL,
+      setIsLoading(true);
+      const response = await fetch(
+        "https://getaianswertoquestion-uah4h66gpq-uc.a.run.app",
         {
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "user",
-              content: `Based on this: "${userInput}", answer this: "${question}"
-             `,
-            },
-          ],
-        },
-        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
           },
+          body: JSON.stringify({ message: question, originalUserInput: userInput }),
         }
       );
-      setResponse(result.data.choices[0].message.content);
+      const data = await response.json();
+      setResponse(data.answer);
     } catch (error) {
-      console.error("Error fetching response:", error);
-      setResponse("Oops! Something went wrong.");
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <Box className="side-assistant">
 

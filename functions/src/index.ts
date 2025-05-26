@@ -4,18 +4,27 @@ import { defineSecret } from "firebase-functions/params";
 import axios from "axios";
 
 const OPEN_AI_API = defineSecret("OPEN_AI_API");
+const allowedOrigins = [
+  "https://mimirclosedbeta.vercel.app",
+  "http://localhost:5175",
+];
+const setCorsHeaders = (res: any, req: any) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.set("Access-Control-Allow-Origin", origin);
+  }
+  res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+};
 
 export const getAiResponse = onRequest(
   { secrets: [OPEN_AI_API] },
   async (req, res) => {
+    setCorsHeaders(res, req);
+
     // Handle preflight  requests
     if (req.method === "OPTIONS") {
-      res.set(
-        "Access-Control-Allow-Origin",
-        "https://mimirclosedbeta.vercel.app"
-      );
-      res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-      res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
       res.status(204).send();
       return;
     }
@@ -41,19 +50,66 @@ export const getAiResponse = onRequest(
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${OPEN_AI_API.value()}`,
+          },
+        }
+      );
+
+      res
+        .status(200)
+        .send({ summary: response.data.choices[0].message.content });
+    } catch (error) {
+      console.error("Error fetching summary:", error);
+      res.send("Oops! Something went wrong, please try again.");
+    }
+
+  }
+);
+
+// secondary assistant
+
+export const getAiAnswerToQuestion = onRequest(
+  { secrets: [OPEN_AI_API] },
+  async (req, res) => {
+    setCorsHeaders(res,req);
+    // Handle preflight  requests
+    if (req.method === "OPTIONS") {
+      res.status(204).send();
+      return;
+    }
+
+    const { originalUserInput, message } = req.body;
+
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: `Answer the question that pertains to this text: ${originalUserInput}. Keep it as succinct as possible without losing any information in translation. `,
+            },
+
+            {
+              role: "user",
+              content: `Here is the users input: ${req.body.message}`,
+            },
+          ],
+          temperature: 0.7,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
             // eslint-disable-next-line
             Authorization: `Bearer ${OPEN_AI_API.value()}`,
           },
         }
       );
 
-      res.set(
-        "Access-Control-Allow-Origin",
-        "https://mimirclosedbeta.vercel.app"
-      );
       res
         .status(200)
-        .send({ summary: response.data.choices[0].message.content });
+        .send({ answer: response.data.choices[0].message.content });
     } catch (error) {
       console.error("Error fetching summary:", error);
       res.send("Oops! Something went wrong, please try again.");

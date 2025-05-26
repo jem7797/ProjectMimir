@@ -27,7 +27,7 @@ const UserInputBox = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        "https://us-central1-projectmimir-83f90.cloudfunctions.net/getAiResponse",
+        "https://getairesponse-uah4h66gpq-uc.a.run.app",
         {
           method: "POST",
           headers: {
@@ -36,10 +36,8 @@ const UserInputBox = () => {
           body: JSON.stringify({ message: userMessage }),
         }
       );
-      const ans = await response.text();
-
-      console.log("res", ans);
-      setSummary(ans);
+      const data = await response.json();
+      setSummary(data.answer);
     } catch (error) {
       console.log(error);
     } finally {
