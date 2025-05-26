@@ -2,7 +2,7 @@ import { Box, IconButton } from "@chakra-ui/react";
 import { useSettings } from "../Components/Context/SettingContext";
 import { RiCloseLine } from "react-icons/ri";
 import ColorModeSwitch from "./ColorModeSwitch";
-import Draggable from "react-draggable";
+import Draggable from 'react-draggable';
 import "../Styles/SettingsMenu.css";
 
 const SettingsMenu = () => {

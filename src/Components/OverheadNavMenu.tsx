@@ -13,24 +13,31 @@ import { CgProfile } from "react-icons/cg";
 import { IoIosNotifications } from "react-icons/io";
 import { GoSun } from "react-icons/go";
 import { IoMoonOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
-
 import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
 import { useSignedIn } from "./Context/SignedInContext";
+import SettingsMenu from "./SettingsMenu";
+import { useSettings } from "./Context/SettingContext";
+
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { signedInUser } = useSignedIn();
-
+  const {settingsIsOpen, setSettingsIsOpen} = useSettings();
   console.log(signedInUser[2]);
 
   const colors = colorMode === "light" ? "blue" : "white";
 
   return (
+
+
+    
     <Box overflow={"hidden"}>
+
       {/* hamburger menu icon */}
       {!isOpen && (
         <IconButton
@@ -48,7 +55,7 @@ const OverheadNavMenu = () => {
         style={{ zIndex: 10, position: "relative" }}
         unmountOnExit
       >
-        <Box overflow={"hidden"}>
+        <Box overflow={"hidden"} marginBottom={3}>
           <VStack alignItems="start">
             {/* Close Menu Icon */}
             <IconButton
@@ -87,7 +94,7 @@ const OverheadNavMenu = () => {
             </Box>
 
             {/* whats new button */}
-            <Box as="ul" className={"menu-items cinzel"} color={colors}>
+            <Box as="ul" className={"menu-items cinzel"} color={colors} marginBottom={3}>
               <Link to={"/"}>
                 <IconButton
                   aria-label={"Whats New"}
@@ -98,11 +105,25 @@ const OverheadNavMenu = () => {
               </Link>
             </Box>
 
+            {/* settings menu */}
+            <Box className={"menu-items cinzel"} color={colors}>
+              <IconButton
+                aria-label={"Settings"}
+                icon={<IoSettingsOutline />}
+                fontSize={"x-large"}
+                variant={"ghost"}
+                onClick={() => setSettingsIsOpen(!settingsIsOpen)}
+              />
+
+              {settingsIsOpen ? <SettingsMenu/> : ""}
+            </Box>
+
             {/* Color Mode Switch */}
             <Box
               className="menu-items cinzel"
               color={colors}
               overflow={"hidden"}
+              marginBottom={3}
             >
               <IconButton
                 aria-label={"Color Mode Switch"}
