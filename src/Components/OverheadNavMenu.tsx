@@ -10,7 +10,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { IoIosNotifications } from "react-icons/io";
+import { SiTheodinproject } from "react-icons/si";
 import { GoSun } from "react-icons/go";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -94,8 +94,8 @@ const OverheadNavMenu = () => {
             >
               <Link to={"/"}>
                 <IconButton
-                  aria-label={"Whats New"}
-                  icon={<IoIosNotifications />}
+                  aria-label={"Mimir"}
+                  icon={<SiTheodinproject />}
                   variant={"ghost"}
                   fontSize={"x-large"}
                 />
@@ -105,16 +105,13 @@ const OverheadNavMenu = () => {
             {/* settings menu */}
             <Box className={"menu-items cinzel"} color={colors}>
               <Link to={"/settings"}>
-              <IconButton
-                aria-label={"Settings"}
-                icon={<IoSettingsOutline />}
-                fontSize={"x-large"}
-                variant={"ghost"}
-              />
+                <IconButton
+                  aria-label={"Settings"}
+                  icon={<IoSettingsOutline />}
+                  fontSize={"x-large"}
+                  variant={"ghost"}
+                />
               </Link>
-
-
-       
             </Box>
 
             {/* Color Mode Switch */}
