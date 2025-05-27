@@ -19,14 +19,11 @@ import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
 import { useSignedIn } from "./Context/SignedInContext";
-import SettingsMenu from "./SettingsMenu";
-import { useSettings } from "./Context/SettingContext";
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { signedInUser } = useSignedIn();
-  const { settingsIsOpen, setSettingsIsOpen } = useSettings();
   console.log(signedInUser[2]);
 
   const colors = colorMode === "light" ? "blue" : "white";
@@ -107,16 +104,16 @@ const OverheadNavMenu = () => {
 
             {/* settings menu */}
             <Box className={"menu-items cinzel"} color={colors}>
+              <Link to={"/settings"}>
               <IconButton
                 aria-label={"Settings"}
                 icon={<IoSettingsOutline />}
                 fontSize={"x-large"}
                 variant={"ghost"}
-                onClick={() => setSettingsIsOpen(!settingsIsOpen)}
               />
+              </Link>
 
-           
-                {settingsIsOpen ? <SettingsMenu /> : ""}
+
        
             </Box>
 

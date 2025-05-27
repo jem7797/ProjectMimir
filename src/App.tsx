@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import ProfilePage from "./Pages/Profile";
 import { SignedInProvider } from "./Components/Context/SignedInContext";
+import Settings from "./Pages/Settings";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<AppContent />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/settings" element= {<Settings/>}> </Route>
               </Routes>
           </SettingsProvider>
         </HamburgerMenuProvider>

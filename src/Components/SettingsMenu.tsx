@@ -1,7 +1,6 @@
-import { Box, IconButton, Slider } from "@chakra-ui/react";
+import { Box, IconButton,  Slider } from "@chakra-ui/react";
 import { useSettings } from "../Components/Context/SettingContext";
 import { RiCloseLine } from "react-icons/ri";
-import ColorModeSwitch from "./ColorModeSwitch";
 
 import "../Styles/SettingsMenu.css";
 
@@ -10,8 +9,8 @@ const SettingsMenu = () => {
 
   return (
     <>
-      <Box>
-        <Box className="settings-menu">
+      <Box className="settings-menu">
+        <Box >
           <IconButton
             fontSize={"x-large"}
             aria-label="Close settings"
@@ -19,7 +18,9 @@ const SettingsMenu = () => {
             icon={<RiCloseLine />}
             className="close-button"
           />
-          <Slider color={"red"}></Slider>
+          <Box>
+<Slider size="lg" min={0} max={100} defaultValue={50} />
+          </Box>
         </Box>
       </Box>
     </>
