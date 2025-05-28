@@ -44,12 +44,12 @@ const ProfileInfo = () => {
   };
 
   return (
-    <Box marginLeft={"-16"}>
+    <Box>
       {isLoading ? (
         <Spinner />
       ) : (
         <Box textAlign={"center"}>
-          <VStack marginLeft={20}>
+          <VStack marginTop={16}>
             {signedInUser[0] && signedInUser[1] ? (
               <>
                 <Text marginTop={"5"} fontSize={"lg"}>

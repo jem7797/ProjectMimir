@@ -8,18 +8,16 @@ const MainProfilePicture = () => {
     <Center>
       {signedInUser && signedInUser[2] ? (
         <Image
-        
           src={signedInUser[2]}
           boxSize={200}
           borderRadius="full"
           objectFit={"cover"}
         />
       ) : (
-        <Icon boxSize={200}>
-           <SiTheodinproject />
+        <Icon boxSize={200} fontSize={"2xl"}>
+          <SiTheodinproject />
         </Icon>
       )}
-      
     </Center>
   );
 };

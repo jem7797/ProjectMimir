@@ -8,12 +8,12 @@ const ProfileContent = () => {
   return (
     <>
 {/* back button */}
-<Box position={"fixed"} top={0} width={"100%"} zIndex={10} height={"NAVBAR_HEIGHT"}>
+<Box position={"fixed"} top={0} width={"100%"} zIndex={10} >
    <OverheadNavMenu/>
 </Box>
       {/* Main Content */}
       
-      <VStack marginTop={"30"} spacing={4} align={"center"}>
+      <VStack marginTop={"30"}  align={"center"}>
         {/* Profile Picture */}
         <MainProfilePicture />
 
