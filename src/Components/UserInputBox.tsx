@@ -24,7 +24,7 @@ const UserInputBox = () => {
   const inputColors = colorMode == "light" ? "blue" : "whiteAlpha.800";
 
   const summarizeText = async () => {
-    if(promptCounter.current >=3) return;
+    if (promptCounter.current >= 3) return;
     setIsLoading(true);
     try {
       setIsLoading(true);
@@ -57,10 +57,14 @@ const UserInputBox = () => {
       <Logo />
 
       {promptCounter.current == 3 ? (
-        <Box outlineColor={"red.500"}>
-          <Text color={"red.500"} textAlign={"center"} fontSize={"xl"}>
-            You have exceeded your free usage limit for this session, please
-            upgrade your plan to continue
+        <Box marginBottom={5} marginTop={5}>
+          <Text
+            color={"red"}
+            textAlign={"center"}
+            fontSize={"2xl"}
+            className="cinzel"
+          >
+            Free limit reached. Upgrade in your profile to contine.
           </Text>
         </Box>
       ) : (
