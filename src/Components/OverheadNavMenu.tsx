@@ -85,7 +85,7 @@ const OverheadNavMenu = () => {
               </Box>
             </Box>
 
-            {/* whats new button */}
+            {/* Mimir button */}
             <Box
               as="ul"
               className={"menu-items cinzel"}

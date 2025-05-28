@@ -1,15 +1,17 @@
-import { Box } from "@chakra-ui/react";
+import {  Center, Icon, Image } from "@chakra-ui/react";
 import { SiTheodinproject } from "react-icons/si";
+import { useSignedIn } from "../../Components/Context/SignedInContext";
 
 const MainProfilePicture = () => {
+  const {signedInUser} = useSignedIn();
   return (
-    <Box justifyItems={"center"} fontSize={"9xl"} marginTop={"30px"}>
-      <SiTheodinproject />
-     
-    </Box>
-  )
-}
+    <Center>
+      <Icon boxSize={200}>
+        {signedInUser && signedInUser[2] ? <Image src={signedInUser[2]} boxSize={200} borderRadius="full" /> : <SiTheodinproject />}
+        
+      </Icon>
+    </Center>
+  );
+};
 
-export default MainProfilePicture
-
-
+export default MainProfilePicture;

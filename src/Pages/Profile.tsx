@@ -1,35 +1,26 @@
-import { Box, IconButton } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import MainProfilePicture from "./Profile Components/MainProfilePicture";
 import ProfileInfo from "./Profile Components/ProfileInfo";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+
+import OverheadNavMenu from "../Components/OverheadNavMenu";
 
 const ProfileContent = () => {
   return (
-    <Box >
+    <>
 {/* back button */}
-      <Link to={"/"} >
-        <IconButton
-          aria-label={"back button"}
-          icon={<IoMdArrowRoundBack />}
-          variant={"ghost"}
-          fontSize={"xx-large"}
-          marginTop={"5px"}
-          marginLeft={"5px"}
-          height={"20px"}
-          overflow={"hidden"}
-        />
-      </Link>
-
+<Box position={"fixed"} top={0} width={"100%"} zIndex={10} height={"NAVBAR_HEIGHT"}>
+   <OverheadNavMenu/>
+</Box>
       {/* Main Content */}
-      <Box flex="1" justifyContent={"center"} alignContent={""}>
+      
+      <VStack marginTop={"30"} spacing={4} align={"center"}>
         {/* Profile Picture */}
         <MainProfilePicture />
 
         {/* Profile Info */}
         <ProfileInfo />
-      </Box>
-    </Box>
+      </VStack>
+    </>
   );
 };
 export default ProfileContent;
