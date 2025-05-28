@@ -8,6 +8,7 @@ const MainProfilePicture = () => {
     <Center>
       {signedInUser && signedInUser[2] ? (
         <Image
+        
           src={signedInUser[2]}
           boxSize={200}
           borderRadius="full"
