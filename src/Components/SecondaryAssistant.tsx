@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -12,18 +12,17 @@ import "../Styles/SecondaryAssistant.css";
 
 interface SideAssistantProps {
   userInput: string;
-  questionCounter: number;
 }
 
-const SideAssistant: React.FC<SideAssistantProps> = ({ userInput, questionCounter }) => {
+const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { colorMode } = useColorMode();
   const inputColors = colorMode === "dark" ? "white" : "blue";
-
+  const questionCounter = useRef(0);
       const askQuestion = async () => {
-            if (!question.trim() || questionCounter >= 3) return; // Prevent empty requests
+            if (!question.trim() || questionCounter.current >= 3) return; 
 
     setIsLoading(true);
     try {
@@ -44,7 +43,7 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput, questionCounte
       console.log(error);
     } finally {
       setIsLoading(false);
-      questionCounter += 1;
+      questionCounter.current += 1;
     }
   };
   return (
@@ -61,7 +60,7 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput, questionCounte
       <Box className="button-container">
         <Button
           onClick={askQuestion}
-          isDisabled={question.length <= 2 || questionCounter >= 3}
+          isDisabled={question.length <= 2 || questionCounter.current >= 3}
           rightIcon={<IoIosSend />}
         >
           Ask

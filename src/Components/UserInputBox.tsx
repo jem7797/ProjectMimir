@@ -128,7 +128,7 @@ const UserInputBox = () => {
             </Text>
           </Box>
 
-          <SecondaryAssistant userInput={userMessage} questionCounter={promptCounter.current} />
+          <SecondaryAssistant userInput={userMessage}  />
         </Box>
       )}
     </Box>
