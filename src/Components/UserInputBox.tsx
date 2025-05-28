@@ -6,7 +6,7 @@ import {
   Spinner,
   useColorMode,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Logo from "./Logo";
 import { BsLightning } from "react-icons/bs";
 import "../Styles/UserInputBox.css";
@@ -19,12 +19,12 @@ const UserInputBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [menuIsOpen] = useState(false);
   const { colorMode } = useColorMode();
-
-  let promptCounter = 0;
+  const promptCounter = useRef(0);
 
   const inputColors = colorMode == "light" ? "blue" : "whiteAlpha.800";
 
   const summarizeText = async () => {
+    if(promptCounter.current >=3) return;
     setIsLoading(true);
     try {
       setIsLoading(true);
@@ -44,7 +44,7 @@ const UserInputBox = () => {
       console.log(error);
     } finally {
       setIsLoading(false);
-      promptCounter += 1;
+      promptCounter.current += 1;
     }
   };
 
@@ -56,7 +56,7 @@ const UserInputBox = () => {
 
       <Logo />
 
-      {promptCounter == 3 ? (
+      {promptCounter.current == 3 ? (
         <Box outlineColor={"red.500"}>
           <Text color={"red.500"} textAlign={"center"} fontSize={"xl"}>
             You have exceeded your free usage limit for this session, please
@@ -92,7 +92,7 @@ const UserInputBox = () => {
         <Button
           color={inputColors}
           onClick={summarizeText}
-          isDisabled={userMessage.length <= 2 || promptCounter == 3}
+          isDisabled={userMessage.length <= 2 || promptCounter.current == 3}
         >
           Summarize <BsLightning style={{ marginLeft: "8px" }} />
         </Button>
