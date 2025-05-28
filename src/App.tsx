@@ -12,11 +12,14 @@ import {
 import ProfilePage from "./Pages/Profile";
 import { SignedInProvider } from "./Components/Context/SignedInContext";
 import Settings from "./Pages/Settings";
+import { SliderProvider } from "./Components/Context/SliderContext";
 
 const App = () => {
   return (
     <Router>
       <div>
+        
+        <SliderProvider>
         <SignedInProvider>
         <HamburgerMenuProvider>
           <SettingsProvider>
@@ -28,6 +31,7 @@ const App = () => {
           </SettingsProvider>
         </HamburgerMenuProvider>
         </SignedInProvider>
+        </SliderProvider>
       </div>
     </Router>
   );

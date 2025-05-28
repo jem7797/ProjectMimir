@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { IoIosSend } from "react-icons/io";
 import "../Styles/SecondaryAssistant.css";
+import { useSlider } from "./Context/SliderContext";
 
 interface SideAssistantProps {
   userInput: string;
@@ -17,12 +18,13 @@ interface SideAssistantProps {
 const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
+  const { sliderValue } = useSlider();
   const [isLoading, setIsLoading] = useState(false);
   const { colorMode } = useColorMode();
   const inputColors = colorMode === "dark" ? "white" : "blue";
   const questionCounter = useRef(0);
-      const askQuestion = async () => {
-            if (!question.trim() || questionCounter.current >= 3) return; 
+  const askQuestion = async () => {
+    if (!question.trim() || questionCounter.current >= 3) return;
 
     setIsLoading(true);
     try {
@@ -34,7 +36,11 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: question, originalUserInput: userInput }),
+          body: JSON.stringify({
+            message: question,
+            originalUserInput: userInput,
+            lengthValue: sliderValue,
+          }),
         }
       );
       const data = await response.json();
@@ -48,7 +54,6 @@ const SideAssistant: React.FC<SideAssistantProps> = ({ userInput }) => {
   };
   return (
     <Box className="side-assistant">
-
       <Box className="textarea-container">
         <Textarea
           placeholder="Ask about the text..."

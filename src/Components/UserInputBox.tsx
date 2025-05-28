@@ -12,10 +12,12 @@ import { BsLightning } from "react-icons/bs";
 import "../Styles/UserInputBox.css";
 import "../Styles/fonts.css";
 import SecondaryAssistant from "./SecondaryAssistant";
+import { useSlider } from "./Context/SliderContext";
 
 const UserInputBox = () => {
   const [userMessage, setUserMessage] = useState("");
   const [summary, setSummary] = useState("");
+const {sliderValue} = useSlider();
   const [isLoading, setIsLoading] = useState(false);
   const [menuIsOpen] = useState(false);
   const { colorMode } = useColorMode();
@@ -35,7 +37,7 @@ const UserInputBox = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: userMessage }),
+          body: JSON.stringify({ message: userMessage, lengthValue: sliderValue }),
         }
       );
       const data = await response.json();

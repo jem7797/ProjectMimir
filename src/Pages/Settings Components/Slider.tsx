@@ -10,15 +10,15 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
+import { useSlider } from "../../Components/Context/SliderContext";
 
 interface Props {
   sliderName: string;
 }
 
 const SummarySlider = (sliderName: Props) => {
-  const [sliderValue, setSliderValue] = useState(50);
+  const {sliderValue, setSliderValue} = useSlider();
 
   return (
     <Box>

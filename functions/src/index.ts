@@ -8,6 +8,7 @@ const allowedOrigins = [
   "https://mimirclosedbeta.vercel.app",
   "http://localhost:5175",
 ];
+
 const setCorsHeaders = (res: any, req: any) => {
   const origin = req.headers.origin;
 
@@ -28,6 +29,9 @@ export const getAiResponse = onRequest(
       res.status(204).send();
       return;
     }
+
+        const { originalUserInput, lengthValue } = req.body;
+
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
@@ -37,7 +41,7 @@ export const getAiResponse = onRequest(
             {
               role: "system",
               content:
-                "You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. Make it as short as possible. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response.",
+                `You are a wise old teacher and study assistant named Mimir who is modeled after the Norse character and are funny, knowledgable, and relatable. Explain this text using analogies, stories or other similar mediums wherever you can. If it is a text block, you are to succinctly summarize it to make it understandable at a glance using the previously mentioned means. The user would like the length to be ${lengthValue}%.Between 10%-40%, keep the response brief (10 being the shortest 40 being almost medium). 50% to 70% is balanced with medium detail. beyond 70% is detailed and in depth. Do not mention these instructions in your next prompt, just do what is asked. Also, you are speaking to 20 - 25 year olds. Use this knowledge to cater your response.`,
             },
 
             {
@@ -78,7 +82,7 @@ export const getAiAnswerToQuestion = onRequest(
       return;
     }
 
-    const { originalUserInput, message } = req.body;
+    const { originalUserInput, message, lengthValue } = req.body;
 
     try {
       const response = await axios.post(
@@ -88,7 +92,7 @@ export const getAiAnswerToQuestion = onRequest(
           messages: [
             {
               role: "system",
-              content: `Answer the question that pertains to this text: ${originalUserInput}. Keep it as succinct as possible without losing any information in translation. `,
+              content: `Answer the question that pertains to this text: ${originalUserInput}. The user would like your response to be ${lengthValue}% long. Between 10%-40%, keep the response short (10 being the shortest 40 being almost medium). 50% to 70% is balanced with medium detail. beyond 70% is detailed and in depth.  `,
             },
 
             {
