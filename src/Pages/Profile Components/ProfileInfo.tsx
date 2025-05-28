@@ -68,7 +68,11 @@ const ProfileInfo = () => {
               </>
             ) : (
               <>
-                <Button color={"blue.500"} onClick={handleGoogleSignIn}>
+                <Button
+                  color={"blue.500"}
+                  outlineColor={"blue.500"}
+                  onClick={handleGoogleSignIn}
+                >
                   Sign In
                 </Button>
               </>
