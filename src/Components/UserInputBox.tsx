@@ -20,6 +20,8 @@ const UserInputBox = () => {
   const [menuIsOpen] = useState(false);
   const { colorMode } = useColorMode();
 
+  let promptCounter = 0;
+
   const inputColors = colorMode == "light" ? "blue" : "whiteAlpha.800";
 
   const summarizeText = async () => {
@@ -42,6 +44,7 @@ const UserInputBox = () => {
       console.log(error);
     } finally {
       setIsLoading(false);
+      promptCounter += 1;
     }
   };
 
@@ -52,6 +55,17 @@ const UserInputBox = () => {
       <Text className="title cinzel">Mimir</Text>
 
       <Logo />
+
+      {promptCounter == 3 ? (
+        <Box outlineColor={"red.500"}>
+          <Text color={"red.500"} textAlign={"center"} fontSize={"xl"}>
+            You have exceeded your free usage limit for this session, please
+            upgrade your plan to continue
+          </Text>
+        </Box>
+      ) : (
+        ""
+      )}
       {/* main text box */}
       <Box className="textarea-container">
         <Textarea
@@ -78,7 +92,7 @@ const UserInputBox = () => {
         <Button
           color={inputColors}
           onClick={summarizeText}
-          isDisabled={userMessage.length <= 2}
+          isDisabled={userMessage.length <= 2 || promptCounter == 3}
         >
           Summarize <BsLightning style={{ marginLeft: "8px" }} />
         </Button>
