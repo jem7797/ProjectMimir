@@ -13,6 +13,7 @@ import ProfilePage from "./Pages/Profile";
 import { SignedInProvider } from "./Components/Context/SignedInContext";
 import Settings from "./Pages/Settings";
 import { SliderProvider } from "./Components/Context/SliderContext";
+import Logs from "./Pages/Logs";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
                 <Route path="/" element={<AppContent />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element= {<Settings/>}> </Route>
+                <Route path="/logs" element={<Logs/>} />
               </Routes>
           </SettingsProvider>
         </HamburgerMenuProvider>

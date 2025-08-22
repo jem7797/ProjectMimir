@@ -19,6 +19,7 @@ import "../Styles/OverheadNavMenu.css";
 import "..//Styles/fonts.css";
 import { Link } from "react-router-dom";
 import { useSignedIn } from "./Context/SignedInContext";
+import { FaBook } from "react-icons/fa";
 
 const OverheadNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,11 +104,25 @@ const OverheadNavMenu = () => {
             </Box>
 
             {/* settings menu */}
-            <Box className={"menu-items cinzel"} color={colors}>
+            <Box className={"menu-items cinzel"} 
+            color={colors}>
               <Link to={"/settings"}>
                 <IconButton
                   aria-label={"Settings"}
                   icon={<IoSettingsOutline />}
+                  fontSize={"x-large"}
+                  variant={"ghost"}
+                />
+              </Link>
+            </Box>
+
+            {/* logs menu */}
+            <Box className={"menu-items cinzel"} color={colors}>
+              <Link to={"/logs"}>
+                <IconButton
+                  aria-label={"Logs"}
+                  icon={<FaBook />
+                  }
                   fontSize={"x-large"}
                   variant={"ghost"}
                 />

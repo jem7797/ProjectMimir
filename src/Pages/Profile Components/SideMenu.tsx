@@ -30,6 +30,7 @@ const SideMenu = () => {
       >
         <Menu style={{ padding: "10px" }}>
           <MenuItem component={<Link to="/" />}> Mimir </MenuItem>
+          <MenuItem component={<Link to="/logs" />}> Logs </MenuItem>
           <MenuItem onClick={() => handleClick()}> Settings </MenuItem>
         </Menu>
       </Sidebar>
